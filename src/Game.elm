@@ -273,6 +273,14 @@ currentStatus : Model -> GameStatus
 currentStatus (Model model) =
     model.status
 
+statusMessage : GameStatus -> StatusMessage
+statusMessage gamestatus =
+    case gamestatus of
+        InPlay Human ChoosingPiece ->
+            PlayersTurn
+        _ ->
+            NotPlayersTurn
+
 
 playerToString : Player -> String
 playerToString player =
