@@ -68,6 +68,10 @@ type GameStatus
     | Won Winner
     | Draw
 
+type StatusMessage
+    = PlayersTurn
+    | NotPlayersTurn
+
 
 type Model
     = Model { board : Board, status : GameStatus }
