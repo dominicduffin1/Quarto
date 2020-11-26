@@ -74,7 +74,7 @@ type StatusMessage
 
 
 type Model
-    = Model { board : Board, status : GameStatus }
+    = Model { board : Board, status : GameStatus, statusMessage : StatusMessage }
 
 
 
@@ -86,9 +86,13 @@ initStatus =
     InPlay Human ChoosingPiece
 
 
+initStatusMessage : StatusMessage
+initStatusMessage = PlayersTurn
+
+
 init : Model
 init =
-    Model { board = Board.init, status = initStatus }
+    Model { board = Board.init, status = initStatus, statusMessage = initStatusMessage }
 
 
 
@@ -116,6 +120,10 @@ update msg (Model model) =
                 |> noCmds
                 |> map (nextPlayerStartsPlaying Human piece)
                 |> andThen (computerChooses ComputerSelectedCell Board.openCells)
+
+        ( HumanSelectedPiece piece, _ ) ->
+            Model model
+                |> noCmds
 
         ( ComputerSelectedCell name, InPlay Computer (ChoosingCellToPlay piece) ) ->
             Model model
