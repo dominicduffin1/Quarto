@@ -5,6 +5,7 @@ module Game exposing
     , Msg(..)
     , Player(..)
     , Turn(..)
+    , StatusMessage(..)
     , currentStatus
     , gameboard
     , init

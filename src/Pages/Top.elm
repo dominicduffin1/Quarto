@@ -38,6 +38,7 @@ import Game
         , Msg(..)
         , Player(..)
         , Turn(..)
+        , StatusMessage(..)
         )
 import Game.Core
     exposing
@@ -221,6 +222,14 @@ viewGamestatus gamestatus dimensions =
             containerize
                 [ script ]
 
+
+viewStatusMessage : StatusMessage -> Element Msg
+viewStatusMessage statusMessage =
+    case statusMessage of
+        PlayersTurn ->
+            Element.el [] (Element.text "")
+        NotPlayersTurn ->
+            Element.el [] (Element.text "You can't place a piece right now. Wait for your turn!")
 
 viewCell : Cell -> Element Msg
 viewCell { name, status } =
