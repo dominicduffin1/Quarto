@@ -14,6 +14,7 @@ module Game exposing
     , playerToString
     , remainingPieces
     , statusMessage
+    , currentStatusMessage
     , update
     )
 
@@ -290,6 +291,10 @@ statusMessage gamestatus =
             PlayersTurn
         _ ->
             NotPlayersTurn
+
+currentStatusMessage : Model -> GameStatus
+currentStatusMessage (Model model) =
+    model.status
 
 
 playerToString : Player -> String
