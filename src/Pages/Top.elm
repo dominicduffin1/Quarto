@@ -155,6 +155,7 @@ view model =
                 , viewRemainingPieces (Game.remainingPieces model.game)
                 ]
             , viewGamestatus (Game.currentStatus model.game) model.dimensions
+            , viewStatusMessage (Game.statusMessage model.game)
             ]
         ]
     }

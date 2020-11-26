@@ -13,6 +13,7 @@ module Game exposing
     , pieceToString
     , playerToString
     , remainingPieces
+    , statusMessage
     , update
     )
 
