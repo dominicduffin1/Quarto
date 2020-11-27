@@ -72,8 +72,8 @@ type GameStatus
     | Draw
 
 type StatusMessage
-    = PlayersTurn
-    | NotPlayersTurn
+    = NoMessage
+    | SomePiecePlayedWhenNotPlayersTurn
 
 
 type Model
@@ -90,7 +90,7 @@ initStatus =
 
 
 initStatusMessage : StatusMessage
-initStatusMessage = PlayersTurn
+initStatusMessage = NoMessage
 
 
 init : Model
@@ -125,7 +125,7 @@ update msg (Model model) =
                 |> andThen (computerChooses ComputerSelectedCell Board.openCells)
 
         ( HumanSelectedPiece piece, _ ) ->
-            Model model
+            Model { model | statusMessage = SomePiecePlayedWhenNotPlayersTurn }
                 |> noCmds
 
         ( ComputerSelectedCell name, InPlay Computer (ChoosingCellToPlay piece) ) ->

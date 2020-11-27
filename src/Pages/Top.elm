@@ -227,9 +227,9 @@ viewGamestatus gamestatus dimensions =
 viewStatusMessage : StatusMessage -> Element Msg
 viewStatusMessage statusMessage =
     case statusMessage of
-        PlayersTurn ->
+        NoMessage ->
             Element.el [] (Element.text "")
-        NotPlayersTurn ->
+        SomePiecePlayedWhenNotPlayersTurn ->
             Element.el [] (Element.text "You can't place a piece right now. Wait for your turn!")
 
 viewCell : Cell -> Element Msg
