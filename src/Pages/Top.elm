@@ -230,7 +230,7 @@ viewStatusMessage statusMessage =
         NoMessage ->
             Element.el [] (Element.text "")
         SomePiecePlayedWhenNotPlayersTurn ->
-            Element.el [] (Element.text "You can't place a piece right now. Wait for your turn!")
+            Element.el [ centerX, Font.center, Region.announce ] (Element.text "It's not your turn to choose a piece!")
 
 viewCell : Cell -> Element Msg
 viewCell { name, status } =
