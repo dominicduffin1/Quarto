@@ -13,7 +13,6 @@ module Game exposing
     , pieceToString
     , playerToString
     , remainingPieces
-    , statusMessage
     , currentStatusMessage
     , update
     )
@@ -284,17 +283,10 @@ currentStatus : Model -> GameStatus
 currentStatus (Model model) =
     model.status
 
-statusMessage : GameStatus -> StatusMessage
-statusMessage gamestatus =
-    case gamestatus of
-        InPlay Human ChoosingPiece ->
-            PlayersTurn
-        _ ->
-            NotPlayersTurn
 
-currentStatusMessage : Model -> GameStatus
+currentStatusMessage : Model -> StatusMessage
 currentStatusMessage (Model model) =
-    model.status
+    model.statusMessage
 
 
 playerToString : Player -> String
