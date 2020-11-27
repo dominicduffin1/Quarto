@@ -146,7 +146,7 @@ update msg (Model model) =
                 |> map (nextPlayerStartsPlaying Computer piece)
 
         ( HumanSelectedCell name, InPlay Human (ChoosingCellToPlay piece) ) ->
-            Model model
+            Model { model | statusMessage = NoMessage }
                 |> noCmds
                 |> map (playerTryPlay name piece)
                 |> (\( maybeModel, c ) ->
