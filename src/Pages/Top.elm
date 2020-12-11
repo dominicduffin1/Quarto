@@ -9,8 +9,11 @@ module Pages.Top exposing
 
 import Angle
 import Array
+import Axis3d
 import Block3d
 import Camera3d
+import Color
+import Cylinder3d
 import Direction3d
 import Html exposing (Html)
 import Element
@@ -37,6 +40,7 @@ import Element.Border as Border
 import Element.Font as Font
 import Element.Input as Input
 import Element.Region as Region
+import Frame3d
 import Game
     exposing
         ( Cell
@@ -169,6 +173,7 @@ view model =
                 ]
             , viewGamestatus (Game.currentStatus model.game) model.dimensions
             , viewStatusMessage (Game.currentStatusMessage model.game)
+            , Element.html test3dShape
             ]
         ]
     }
@@ -386,3 +391,82 @@ rowOrCol dims =
 
     else
         row
+
+
+
+-- 3d scene gamepiece helper functions
+
+test3dShape : Html msg
+test3dShape = 
+    let
+        red =
+            Material.nonmetal
+                { baseColor = Color.red
+                , roughness = 1
+                }
+
+        yellow =
+            Material.nonmetal
+                { baseColor = Color.yellow
+                , roughness = 1
+                }
+
+        shortHeight = Length.centimeters 50
+
+        tallHeight = Length.centimeters 100
+        
+        tallRectDimensions = 
+            ( Length.centimeters 20
+            , Length.centimeters 20
+            , tallHeight
+            )
+
+        shortRectDimensions =
+            ( Length.centimeters 20
+            , Length.centimeters 20
+            , shortHeight
+            )
+
+        tallRedRect = 
+            Scene3d.block red <|
+                Block3d.centeredOn (Frame3d.atPoint (Point3d.centimeters 0 0 0)) tallRectDimensions
+
+        tallYellowRect = 
+            Scene3d.block yellow <|
+                Block3d.centeredOn (Frame3d.atPoint (Point3d.centimeters 80 0 0)) tallRectDimensions
+                
+        tallCylinder = 
+            Scene3d.cylinder red <|
+                Cylinder3d.along Axis3d.z {start = Length.meters 0, end = Length.meters 1, radius = Length.meters 0.1}
+
+        shortYellowRect =
+            Scene3d.block yellow <|
+                Block3d.centeredOn (Frame3d.atPoint (Point3d.centimeters 40 0 0)) shortRectDimensions
+
+        shortRedRect =
+            Scene3d.block red <|
+                Block3d.centeredOn (Frame3d.atPoint (Point3d.centimeters -40 0 0)) shortRectDimensions
+                    
+
+        camera = 
+            Camera3d.perspective
+                { viewpoint = 
+                    Viewpoint3d.lookAt
+                        { focalPoint = Point3d.origin
+                        , eyePoint = Point3d.meters 3 3 3
+                        , upDirection = Direction3d.positiveZ
+                        }
+                , verticalFieldOfView = Angle.degrees 30
+                }
+
+    in
+        Scene3d.sunny
+            { camera = camera
+            , clipDepth = Length.centimeters 0.5
+            , dimensions = (Pixels.int 500, Pixels.int 500)
+            , background = Scene3d.transparentBackground
+            , entities = [ tallRedRect, shortRedRect, tallYellowRect, shortYellowRect, tallCylinder ]
+            , shadows = False
+            , upDirection = Direction3d.z
+            , sunlightDirection = Direction3d.yz (Angle.degrees -120)
+            }
