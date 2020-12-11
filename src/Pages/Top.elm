@@ -433,7 +433,7 @@ test3dShape =
 
         tallYellowRect = 
             Scene3d.block yellow <|
-                Block3d.centeredOn (Frame3d.atPoint (Point3d.centimeters 80 0 0)) tallRectDimensions
+                Block3d.centeredOn (Frame3d.atPoint (Point3d.centimeters 80 -80 0)) tallRectDimensions
                 
         tallCylinder = 
             Scene3d.cylinder red <|
@@ -445,7 +445,7 @@ test3dShape =
 
         shortRedRect =
             Scene3d.block red <|
-                Block3d.centeredOn (Frame3d.atPoint (Point3d.centimeters -40 0 0)) shortRectDimensions
+                Block3d.centeredOn (Frame3d.atPoint (Point3d.centimeters 80 -40 0)) shortRectDimensions
                     
 
         camera = 
