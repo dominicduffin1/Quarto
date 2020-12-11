@@ -7,6 +7,12 @@ module Pages.Top exposing
     , view
     )
 
+import Angle
+import Array
+import Block3d
+import Camera3d
+import Direction3d
+import Html exposing (Html)
 import Element
     exposing
         ( Attribute
@@ -50,8 +56,13 @@ import Game.Core
         , Size(..)
         )
 import Helpers exposing (noCmds)
+import Length
 import List.Extra as Liste
 import Pages.NotFound exposing (Msg)
+import Pixels
+import Point3d
+import Scene3d
+import Scene3d.Material as Material exposing (Material)
 import Shared exposing (Dimensions)
 import Spa.Document exposing (Document)
 import Spa.Page as Page exposing (Page)
@@ -59,6 +70,7 @@ import Spa.Url as Url
 import Styles
 import Svg exposing (Svg, svg)
 import Svg.Attributes as Attr
+import Viewpoint3d
 
 
 page : Page Params Model Msg
