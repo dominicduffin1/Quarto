@@ -56,6 +56,7 @@ import Game.Core
         , Size(..)
         )
 import Helpers exposing (noCmds)
+import Html exposing (Html)
 import Length
 import List.Extra as Liste
 import Pages.NotFound exposing (Msg)
