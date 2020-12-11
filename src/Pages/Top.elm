@@ -411,6 +411,12 @@ test3dShape =
                 , roughness = 1
                 }
 
+        black =
+            Material.nonmetal
+                { baseColor = Color.black
+                , roughness = 1
+                }
+
         shortHeight = Length.centimeters 50
 
         tallHeight = Length.centimeters 100
@@ -427,6 +433,12 @@ test3dShape =
             , shortHeight
             )
 
+        insideDimensions =
+            ( Length.centimeters 10
+            , Length.centimeters 10
+            , Length.centimeters 10
+            )
+
         tallRedRect = 
             Scene3d.block red <|
                 Block3d.centeredOn (Frame3d.atPoint (Point3d.centimeters 0 0 0)) tallRectDimensions
@@ -435,9 +447,13 @@ test3dShape =
             Scene3d.block yellow <|
                 Block3d.centeredOn (Frame3d.atPoint (Point3d.centimeters 80 -80 0)) tallRectDimensions
                 
-        tallCylinder = 
+        tallRedCylinder = 
             Scene3d.cylinder red <|
-                Cylinder3d.along Axis3d.z {start = Length.meters 0, end = Length.meters 1, radius = Length.meters 0.1}
+                Cylinder3d.along (Axis3d.through (Point3d.meters 0 0.4 0) Direction3d.z) {start = Length.meters 0, end = Length.meters 1, radius = Length.meters 0.1}
+
+        shortYellowCylinder = 
+            Scene3d.cylinder yellow <|
+                Cylinder3d.along (Axis3d.through (Point3d.meters 0 0.8 0) Direction3d.z) {start = Length.meters 0, end = Length.meters 0.5, radius = Length.meters 0.1}
 
         shortYellowRect =
             Scene3d.block yellow <|
@@ -446,6 +462,10 @@ test3dShape =
         shortRedRect =
             Scene3d.block red <|
                 Block3d.centeredOn (Frame3d.atPoint (Point3d.centimeters 80 -40 0)) shortRectDimensions
+
+        blackInside =
+            Scene3d.block black <|
+                Block3d.centeredOn (Frame3d.atPoint (Point3d.centimeters 80 -40 25)) insideDimensions
                     
 
         camera = 
@@ -465,7 +485,7 @@ test3dShape =
             , clipDepth = Length.centimeters 0.5
             , dimensions = (Pixels.int 500, Pixels.int 500)
             , background = Scene3d.transparentBackground
-            , entities = [ tallRedRect, shortRedRect, tallYellowRect, shortYellowRect, tallCylinder ]
+            , entities = [ tallRedRect, shortRedRect, tallYellowRect, shortYellowRect, tallRedCylinder, shortYellowCylinder, blackInside ]
             , shadows = False
             , upDirection = Direction3d.z
             , sunlightDirection = Direction3d.yz (Angle.degrees -120)
