@@ -80,7 +80,7 @@ type MouseStatus
 
 
 type Model
-    = Model { board : Board, status : GameStatus, statusMessage : StatusMessage }
+    = Model { board : Board, status : GameStatus, statusMessage : StatusMessage, mouseStatus : MouseStatus }
 
 
 
@@ -95,10 +95,13 @@ initStatus =
 initStatusMessage : StatusMessage
 initStatusMessage = NoMessage
 
+initMouseStatus : MouseStatus
+initMouseStatus = MouseUp
+
 
 init : Model
 init =
-    Model { board = Board.init, status = initStatus, statusMessage = initStatusMessage }
+    Model { board = Board.init, status = initStatus, statusMessage = initStatusMessage, mouseStatus = initMouseStatus }
 
 
 
