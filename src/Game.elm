@@ -74,6 +74,10 @@ type StatusMessage
     = NoMessage
     | SomePiecePlayedWhenNotPlayersTurn
 
+type MouseStatus
+    = MouseUp
+    | MouseDown
+
 
 type Model
     = Model { board : Board, status : GameStatus, statusMessage : StatusMessage }
