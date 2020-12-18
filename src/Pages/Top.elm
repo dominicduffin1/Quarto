@@ -11,6 +11,7 @@ import Angle
 import Array
 import Axis3d
 import Block3d
+import Browser.Events as Events
 import Camera3d
 import Color
 import Cylinder3d
@@ -61,6 +62,7 @@ import Game.Core
         )
 import Helpers exposing (noCmds)
 import Html exposing (Html)
+import Json.Decode as JsonD
 import Length
 import List.Extra as Liste
 import Pages.NotFound exposing (Msg)
